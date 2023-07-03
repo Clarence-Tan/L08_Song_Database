@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Song Database</string>
+    <string name="title">Song Title</string>
+    <string name="titleInput">Enter song title here</string>
+    <string name="singers">Singers</string>
+    <string name="singersInput">Enter singer\'s name here</string>
+    <string name="year">Year</string>
+    <string name="yearInput">Enter year of release here</string>
+    <string name="stars">Stars</string>
+    <string name="insert">Insert</string>
+    <string name="showList">Show List</string>
+</resources>
