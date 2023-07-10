@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VER = 1;
+    private static final int DATABASE_VER = 2;
     private static final String DATABASE_NAME = "songs.db";
     private static final String TABLE_TASK = "song";
     private static final String COLUMN_ID = "_id";
@@ -62,35 +62,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> getTaskContent() {
-        // Create an ArrayList that holds String objects
-        ArrayList<String> tasks = new ArrayList<String>();
-        // Get the instance of database to read
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
-        // Run the query and get back the Cursor object
-        Cursor cursor = db.query(TABLE_TASK, columns, null, null, null, null, null, null);
-
-        // moveToFirst() moves to first row, null if no records
-        if (cursor.moveToFirst()) {
-            // Loop while moveToNext() points to next row
-            //  and returns true; moveToNext() returns false
-            //  when no more next row to move to
-            do {
-                // Add the task content to the ArrayList object
-                //  getString(0) retrieves first column data
-                //  getString(1) return second column data
-                //  getInt(0) if data is an integer value
-                tasks.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-        // Close connection
-        cursor.close();
-        db.close();
-
-        return tasks;
-    }
-
     public ArrayList<Song> getSongs() {
         ArrayList<Song> tasks = new ArrayList<Song>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -111,6 +82,29 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return tasks;
+    }
+
+    public int updateSong(Song data){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, data.getTitle());
+        values.put(COLUMN_SINGERS, data.getSingers());
+        values.put(COLUMN_YEAR, data.getYear());
+        values.put(COLUMN_STARS, data.getStars());
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(data.getId())};
+        int result = db.update(TABLE_TASK, values, condition, args);
+        db.close();
+        return result;
+    }
+
+    public int deleteSong(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        int result = db.delete(TABLE_TASK, condition, args);
+        db.close();
+        return result;
     }
 
 }

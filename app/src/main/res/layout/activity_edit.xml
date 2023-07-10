@@ -6,13 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/musicbg"
-    tools:context=".MainActivity" >
+    tools:context=".EditActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="30dp">
+
+        <TextView
+            android:id="@+id/tvSongID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/songID"
+            android:textColor="@color/black"
+            android:textSize="24dp" />
+
+        <EditText
+            android:id="@+id/etSongID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edit_background"
+            android:padding="10dp"
+            android:enabled="false"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -81,8 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_background"
-            android:padding="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <RadioButton
                 android:id="@+id/radioButton1"
@@ -126,19 +144,25 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnInsert"
+                android:id="@+id/btnUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/insert" />
+                android:text="@string/update" />
 
             <Button
-                android:id="@+id/btnShow"
+                android:id="@+id/btnDelete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/showList" />
+                android:text="@string/delete" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel" />
 
     </LinearLayout>
 

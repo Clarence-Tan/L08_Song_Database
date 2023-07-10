@@ -2,6 +2,7 @@ package sg.edu.rp.c346.id22034700.songdatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     EditText etTitle, etSinger, etYear;
     RadioGroup rg;
     Button btnInsert, btnShow;
-    ListView lvResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,6 @@ public class MainActivity extends AppCompatActivity {
         rg = findViewById(R.id.radioGroup);
         btnInsert = findViewById(R.id.btnInsert);
         btnShow = findViewById(R.id.btnShow);
-        lvResults = findViewById(R.id.lvDisplay);
-
-        DBHelper db = new DBHelper(MainActivity.this);
-        ArrayList<Song> song = db.getSongs();
-        ArrayAdapter aaSongs = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, song);
-        lvResults.setAdapter(aaSongs);
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Song> updatedSongList = db.getSongs();
-                aaSongs.clear();
-                aaSongs.addAll(updatedSongList);
-                aaSongs.notifyDataSetChanged();
+                Intent i = new Intent(MainActivity.this, DisplayActivity.class);
+                startActivity(i);
+                //aaSongs.clear();
+                //aaSongs.addAll(updatedSongList);
+                //aaSongs.notifyDataSetChanged();
             }
         });
     }
