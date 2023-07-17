@@ -89,6 +89,9 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper db = new DBHelper(EditActivity.this);
                 db.deleteSong(data.getId());
+                Intent intent1 = new Intent(EditActivity.this, DisplayActivity.class);
+                intent1.putExtra("id", data.getId());
+                startActivity(intent1);
                 finish();
             }
         });
